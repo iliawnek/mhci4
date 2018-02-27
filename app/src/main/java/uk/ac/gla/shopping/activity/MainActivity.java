@@ -1,5 +1,8 @@
 package uk.ac.gla.shopping.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -54,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, ShoppingListFragment.newInstance());
         transaction.commit();
+
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        if (sharedPref.getBoolean("isFirstRun", true)) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("isFirstRun", false);
+            editor.apply();
+            Intent introIntent = new Intent(this, IntroActivity.class);
+            startActivity(introIntent);
+        }
     }
 
 }
