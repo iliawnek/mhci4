@@ -32,7 +32,7 @@ public class ShoppingListFragment extends Fragment {
 
         FragmentShoppingListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shopping_list, container, false);
 
-        ShoppingListActivityRecyclerViewAdapter recyclerViewAdapter = new ShoppingListActivityRecyclerViewAdapter(new ArrayList<>());
+        ShoppingListActivityRecyclerViewAdapter recyclerViewAdapter = new ShoppingListActivityRecyclerViewAdapter(new ArrayList<>(), getContext());
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerView.setAdapter(recyclerViewAdapter);
 

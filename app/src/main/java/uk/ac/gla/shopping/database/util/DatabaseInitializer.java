@@ -26,9 +26,11 @@ public class DatabaseInitializer {
             // If the Database is empty, add the initial data.
             if (database.shoppingListItemDao().rowCount() == 0) {
                 List<ShoppingListItem> shoppingList = new ArrayList<>();
-                shoppingList.add(new ShoppingListItem("Bread"));
-                shoppingList.add(new ShoppingListItem("Milk"));
-                shoppingList.add(new ShoppingListItem("Eggs"));
+
+                String items[] = {"Lychee", "Roast duck", "Pepsi chicken crisps"};
+                for (String item : items) {
+                    shoppingList.add(new ShoppingListItem(item));
+                }
 
                 database.shoppingListItemDao()
                         .insertShoppingListItems(

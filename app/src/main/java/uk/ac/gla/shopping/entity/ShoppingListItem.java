@@ -13,6 +13,9 @@ public class ShoppingListItem {
     @ColumnInfo(name = "name")
     private String name;
 
+    @ColumnInfo(name = "translation")
+    private String translation;
+
     /**
      * Default Constructor
      * <p>
@@ -43,4 +46,13 @@ public class ShoppingListItem {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getTranslation() {
+        return this.translation;
+    }
+
+    public void setTranslation(String translation) {
+        this.translation = translation;
+    }
+
 }
