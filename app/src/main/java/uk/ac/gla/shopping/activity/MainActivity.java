@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String API_KEY = "AIzaSyAE7UkFI4mjE98X-e97GtucHhNf_j5Ssu0";
 
+    private String selectedPhrase;
+
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
         Fragment selectedFragment = null;
@@ -33,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_translate:
                 setTitle(R.string.title_translate);
                 selectedFragment = TranslateFragment.newInstance();
+                if (selectedPhrase != null) {
+                    Bundle arguments = new Bundle();
+                    arguments.putString("selectedPhrase", selectedPhrase);
+                    selectedFragment.setArguments(arguments);
+                    selectedPhrase = null;
+                }
                 break;
             case R.id.navigation_phrasebook:
                 setTitle(R.string.title_phrasebook);
@@ -72,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Programmatically select a bottom navigation item.
-    public void selectNavigationItem(int menuItemId) {
+    public void selectNavigationItem(int menuItemId, String phrase) {
         BottomNavigationView navigation = findViewById(R.id.navigation);
+        if (phrase != null) selectedPhrase = phrase;
         navigation.setSelectedItemId(menuItemId);
     }
 }

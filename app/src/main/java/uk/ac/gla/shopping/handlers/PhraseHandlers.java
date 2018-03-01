@@ -23,6 +23,6 @@ public class PhraseHandlers {
 
         // Select phrasebook fragment.
         MainActivity mainActivity = (MainActivity) context;
-        mainActivity.selectNavigationItem(R.id.navigation_translate);
+        mainActivity.selectNavigationItem(R.id.navigation_translate, phrase);
     }
 }
