@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import uk.ac.gla.shopping.R;
+import uk.ac.gla.shopping.database.PhraseDatabase;
 import uk.ac.gla.shopping.database.ShoppingListItemDatabase;
 import uk.ac.gla.shopping.database.util.DatabaseInitializer;
 
@@ -49,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DatabaseInitializer.populateAsync(ShoppingListItemDatabase.getInstance(getApplicationContext()));
+        DatabaseInitializer.populateAsync(
+                ShoppingListItemDatabase.getInstance(getApplicationContext()),
+                PhraseDatabase.getInstance(getApplicationContext())
+        );
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
