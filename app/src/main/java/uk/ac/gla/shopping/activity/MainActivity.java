@@ -58,9 +58,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, ShoppingListFragment.newInstance());
-        transaction.commit();
+        // Select shopping list by default.
+        navigation.setSelectedItemId(R.id.navigation_shopping_list);
 
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         if (sharedPref.getBoolean("isFirstRun", true)) {
@@ -72,4 +71,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Programmatically select a bottom navigation item.
+    public void selectNavigationItem(int menuItemId) {
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setSelectedItemId(menuItemId);
+    }
 }
