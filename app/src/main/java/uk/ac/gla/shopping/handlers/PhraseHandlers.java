@@ -17,8 +17,7 @@ public class PhraseHandlers {
 
     public void onClickPhrase(View view) {
         // Get phrase from phrasebook recycler item.
-        ViewGroup childViewGroup = (ViewGroup) ((ViewGroup) view).getChildAt(0);
-        TextView textView = (TextView) childViewGroup.getChildAt(0);
+        TextView textView = view.findViewById(R.id.phraseNameTextView);
         String phrase = textView.getText().toString();
 
         // Select phrasebook fragment.
