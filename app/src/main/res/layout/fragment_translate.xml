@@ -1,15 +1,119 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="uk.ac.gla.shopping.activity.TranslateFragment">
 
-    <EditText
-        android:id="@+id/translateFromText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:textSize="32sp"/>
+    <!-- dummy view for receiving focus when others don't want it -->
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- Chinese -->
+        <RelativeLayout
+            android:id="@+id/section_to_language"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <!-- Chinese text display -->
+            <TextView
+                android:id="@+id/translateToText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/translateToHeader"
+                android:textSize="30sp"
+                android:textColor="@android:color/black"
+                android:hint="英文翻译..."
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:rotation="180"/>
+
+            <!-- Chinese header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/translateToHeader"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="CHINESE"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!-- divider line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <!-- English -->
+        <RelativeLayout
+            android:id="@+id/section_from_language"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <!-- English header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/translateFromHeader"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ENGLISH"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <!-- English text input -->
+            <EditText
+                android:id="@+id/translateFromText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/translateFromHeader"
+                android:textSize="30sp"
+                android:background="@android:color/transparent"
+                android:hint="Translate from English..."
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:gravity="top"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!-- translate button -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_translate"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        android:tint="@android:color/white"
+        app:srcCompat="@drawable/ic_translate_black_24dp" />
+
+</RelativeLayout>
