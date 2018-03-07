@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.PopupMenu;
 
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
@@ -14,6 +17,7 @@ import com.google.cloud.translate.Translation;
 
 import java.util.List;
 
+import uk.ac.gla.shopping.R;
 import uk.ac.gla.shopping.activity.MainActivity;
 import uk.ac.gla.shopping.database.ShoppingListItemDatabase;
 import uk.ac.gla.shopping.databinding.RecyclerItemBinding;
@@ -104,6 +108,33 @@ public class ShoppingListActivityRecyclerViewAdapter extends RecyclerView.Adapte
                         }
                     }.execute();
                 }
+            });
+
+            binding.optionsButton.setOnClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(context, view);
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    MainActivity mainActivity = (MainActivity) context;
+                    switch (menuItem.getItemId()) {
+                        case R.id.menu_shopping_list_item_where:
+                            mainActivity.selectNavigationItem(
+                                    R.id.navigation_translate,
+                                    String.format("Can you help me find %s?", item.getName())
+                            );
+                            return true;
+                        case R.id.menu_shopping_list_item_cost:
+                            mainActivity.selectNavigationItem(
+                                    R.id.navigation_translate,
+                                    String.format("What is the cost of %s?", item.getName())
+                            );
+                        default:
+                            return false;
+                    }
+                });
+
+
+                MenuInflater inflater = popupMenu.getMenuInflater();
+                inflater.inflate(R.menu.shopping_list_item, popupMenu.getMenu());
+                popupMenu.show();
             });
 
             binding.shoppingListItemCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

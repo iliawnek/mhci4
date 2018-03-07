@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_shopping_list_item_where"
+        android:title="@string/menu_where"
+    />
+    <item
+        android:id="@+id/menu_shopping_list_item_cost"
+        android:title="@string/menu_cost"
+    />
+
+</menu>

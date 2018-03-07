@@ -4,5 +4,7 @@
     <string name="title_scanner">Scanner</string>
     <string name="title_translate">Translate</string>
     <string name="title_phrasebook">Phrasebook</string>
+    <string name="menu_where">Where?</string>
+    <string name="menu_cost">Cost?</string>
     <string name="translation_placeholder">Translating&#8230;</string>
 </resources>
