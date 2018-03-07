@@ -25,7 +25,7 @@
 
             <!-- Chinese text display -->
             <TextView
-                android:id="@+id/translateToText"
+                android:id="@+id/target_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/translateToHeader"
@@ -44,6 +44,15 @@
                 android:layout_alignParentBottom="true"
                 android:id="@+id/translateToHeader"
                 android:padding="16dp">
+
+                <ImageButton
+                    android:id="@+id/target_voice_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="More..."
+                    android:tint="@android:color/tab_indicator_text"
+                    app:srcCompat="@drawable/ic_mic_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -82,11 +91,21 @@
                     android:text="ENGLISH"
                     android:textStyle="bold"/>
 
+                <ImageButton
+                    android:id="@+id/source_voice_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="More..."
+                    android:tint="@android:color/tab_indicator_text"
+                    app:srcCompat="@drawable/ic_mic_black_24dp" />
+
             </RelativeLayout>
 
             <!-- English text input -->
             <EditText
-                android:id="@+id/translateFromText"
+                android:id="@+id/source_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/translateFromHeader"
