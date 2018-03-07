@@ -12,11 +12,11 @@ import com.google.cloud.translate.Translation;
 
 import java.util.List;
 
+import uk.ac.gla.shopping.R;
 import uk.ac.gla.shopping.activity.MainActivity;
 import uk.ac.gla.shopping.database.PhraseDatabase;
 import uk.ac.gla.shopping.databinding.PhrasebookRecyclerItemBinding;
 import uk.ac.gla.shopping.entity.Phrase;
-import uk.ac.gla.shopping.handlers.PhraseHandlers;
 
 public class PhrasebookActivityRecyclerViewAdapter extends RecyclerView.Adapter<PhrasebookActivityRecyclerViewAdapter.PhrasebookActivityRecyclerViewHolder> {
 
@@ -64,7 +64,10 @@ public class PhrasebookActivityRecyclerViewAdapter extends RecyclerView.Adapter<
         void bind(Phrase item, Context context) {
             binding.phraseNameTextView.setText(item.getName());
 
-            binding.setHandlers(new PhraseHandlers(context));
+            itemView.setOnClickListener(view -> {
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.selectNavigationItem(R.id.navigation_translate, item.getName());
+            });
 
             class TranslationTask extends AsyncTask<String, Void, String> {
                 @Override
