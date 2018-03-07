@@ -63,14 +63,6 @@ public class ShoppingListActivityRecyclerViewAdapter extends RecyclerView.Adapte
         }
 
         void bind(ShoppingListItem item, Context context) {
-            binding.shoppingListItemNameTextView.setText(item.getName());
-
-            binding.shoppingListItemCheckBox.setChecked(item.isDone());
-
-            binding.deleteButton.setVisibility(item.isDone() ? View.VISIBLE : View.GONE);
-            binding.optionsButton.setVisibility(item.isDone() ? View.GONE : View.VISIBLE);
-
-            binding.deleteButton.setOnClickListener(new
             class TranslationTask extends AsyncTask<String, Void, String> {
                 @Override
                 protected String doInBackground(String... params) {
@@ -92,9 +84,16 @@ public class ShoppingListActivityRecyclerViewAdapter extends RecyclerView.Adapte
                 protected void onPostExecute(String result) {
                     binding.shoppingListItemTranslationTextView.setText(result);
                 }
-            });
+            }
 
-            binding.shoppingListItemCheckBox.setOnCheckedChangeListener(new View.OnClickListener() {
+            binding.shoppingListItemNameTextView.setText(item.getName());
+
+            binding.shoppingListItemCheckBox.setChecked(item.isDone());
+
+            binding.deleteButton.setVisibility(item.isDone() ? View.VISIBLE : View.GONE);
+            binding.optionsButton.setVisibility(item.isDone() ? View.GONE : View.VISIBLE);
+
+            binding.deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new AsyncTask<Void, Void, Void>() {
@@ -107,9 +106,9 @@ public class ShoppingListActivityRecyclerViewAdapter extends RecyclerView.Adapte
                 }
             });
 
-            CompoundButton.OnCheckedChangeListener() {
+            binding.shoppingListItemCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged (CompoundButton compoundButton,boolean b){
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
                         item.setDone(true);
                         new AsyncTask<Void, Void, Void>() {
@@ -130,7 +129,7 @@ public class ShoppingListActivityRecyclerViewAdapter extends RecyclerView.Adapte
                         }.execute();
                     }
                 }
-            }
+            });
 
             if (item.getTranslation() == null) {
                 new TranslationTask().execute(item.getName(), "en", "zh");
