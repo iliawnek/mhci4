@@ -16,6 +16,9 @@ public class ShoppingListItem {
     @ColumnInfo(name = "translation")
     private String translation;
 
+    @ColumnInfo(name = "isDone")
+    private boolean isDone;
+
     /**
      * Default Constructor
      * <p>
@@ -29,6 +32,7 @@ public class ShoppingListItem {
     @Ignore
     public ShoppingListItem(String name) {
         this.name = name;
+        this.isDone = false;
     }
 
     public int getId() {
@@ -55,4 +59,11 @@ public class ShoppingListItem {
         this.translation = translation;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
 }

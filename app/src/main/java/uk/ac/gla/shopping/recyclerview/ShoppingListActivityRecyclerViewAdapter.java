@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
@@ -63,6 +65,12 @@ public class ShoppingListActivityRecyclerViewAdapter extends RecyclerView.Adapte
         void bind(ShoppingListItem item, Context context) {
             binding.shoppingListItemNameTextView.setText(item.getName());
 
+            binding.shoppingListItemCheckBox.setChecked(item.isDone());
+
+            binding.deleteButton.setVisibility(item.isDone() ? View.VISIBLE : View.GONE);
+            binding.optionsButton.setVisibility(item.isDone() ? View.GONE : View.VISIBLE);
+
+            binding.deleteButton.setOnClickListener(new
             class TranslationTask extends AsyncTask<String, Void, String> {
                 @Override
                 protected String doInBackground(String... params) {
@@ -83,6 +91,44 @@ public class ShoppingListActivityRecyclerViewAdapter extends RecyclerView.Adapte
                 @Override
                 protected void onPostExecute(String result) {
                     binding.shoppingListItemTranslationTextView.setText(result);
+                }
+            });
+
+            binding.shoppingListItemCheckBox.setOnCheckedChangeListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void... params) {
+                            ShoppingListItemDatabase.getInstance(view.getContext().getApplicationContext()).shoppingListItemDao().deleteShoppingListItems(item);
+                            return null;
+                        }
+                    }.execute();
+                }
+            });
+
+            CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged (CompoundButton compoundButton,boolean b){
+                    if (b) {
+                        item.setDone(true);
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                ShoppingListItemDatabase.getInstance(context.getApplicationContext()).shoppingListItemDao().updateShoppingListItems(item);
+                                return null;
+                            }
+                        }.execute();
+                    } else {
+                        item.setDone(false);
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                ShoppingListItemDatabase.getInstance(context.getApplicationContext()).shoppingListItemDao().updateShoppingListItems(item);
+                                return null;
+                            }
+                        }.execute();
+                    }
                 }
             }
 
