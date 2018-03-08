@@ -130,11 +130,10 @@ public class OCRGraphic extends GraphicOverlay.Graphic {
                 @Override
                 protected String doInBackground(String... params) {
                     Translate translate = TranslateOptions.newBuilder().setApiKey(MainActivity.API_KEY).build().getService();
-                    //List<Detection> detections = translate.detect(ImmutableList.of(params[0]));
-                    String sourceLang = "pt";
-                            //detections.get(0).getLanguage();
+                    List<Detection> detections = translate.detect(ImmutableList.of(params[0]));
+                    String sourceLang = detections.get(0).getLanguage();
                     Log.d("detectedLanguage", sourceLang);
-                    if (false && !sourceLang.equals(params[1])) {
+                    if (!sourceLang.equals(params[1])) {
                         Translation translation =
                                 translate.translate(
                                         params[0],
@@ -142,7 +141,6 @@ public class OCRGraphic extends GraphicOverlay.Graphic {
                                         Translate.TranslateOption.targetLanguage(params[1]));
                         return translation.getTranslatedText();
                     }
-
                     return params[0];
                 }
 
